@@ -582,22 +582,18 @@
       var card = stack.querySelector('.card[data-id="' + id + '"]');
       if (!card) return;
 
-      // move the clicked card to the front of the column
       stack.insertBefore(card, stack.firstChild);
 
-      // update which card is styled as "top"
       var cards = stack.querySelectorAll('.card');
       cards.forEach(function(c, i) {
         c.classList.toggle('top', i === 0);
       });
 
-      // highlight the active sidebar button
       document.querySelectorAll('nav.entries button').forEach(function(b) {
         b.classList.remove('active');
       });
       if (btn) btn.classList.add('active');
 
-      // scroll the newly-topped card into view
       card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
