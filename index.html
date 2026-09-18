@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jamming.goeshard.org</title>
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    background: #008080;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px);
+    font-family: "Times New Roman", Times, serif;
+    color: #000;
+  }
+
+  .page-wrap {
+    width: 1032px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  header {
+    box-sizing: border-box;
+    margin: 0 0 12px 0;
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    padding: 10px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  header .header-intro {
+    flex: 1;
+    min-width: 220px;
+  }
+  header h1 {
+    margin: 4px 0;
+    font-family: "Courier New", monospace;
+    font-size: 28px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0 #ff00ff;
+  }
+  header p {
+    margin: 4px 0;
+    font-size: 13px;
+    font-family: Verdana, sans-serif;
+  }
+
+  .news-btn {
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    color: #000080;
+    text-shadow: 1px 1px 0 #fff;
+    font-family: Verdana, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    padding: 6px 14px;
+    margin-top: 8px;
+    margin-right: 6px;
+    cursor: pointer;
+  }
+  .news-btn:active {
+    border-style: inset;
+  }
+  .news-btn.active {
+    background: #000080;
+    color: #fff;
+    border-style: inset;
+  }
+
+  .news-box {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 12px 0;
+    background: #ffffcc;
+    border: 2px inset #808080;
+  }
+  .news-box[hidden] {
+    display: none;
+  }
+  .news-box-title {
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: #fff;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .news-close {
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    line-height: 1;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    cursor: pointer;
+  }
+  .news-close:active {
+    border-style: inset;
+  }
+  .news-box-content {
+    padding: 10px 14px;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .news-box-content p {
+    margin: 0 0 8px 0;
+  }
+  .news-box-content p:last-child {
+    margin-bottom: 0;
+  }
+  .news-date {
+    font-family: "Courier New", monospace;
+    color: #000080;
+    font-weight: bold;
+  }
+
+  .link-out {
+    font-family: "Courier New", monospace;
+    background: #fff;
+    border: 1px inset #808080;
+    padding: 2px 6px;
+    color: #000080;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .link-out:hover {
+    background: #ffff99;
+  }
+
+  .email-address {
+    font-family: "Courier New", monospace;
+    background: #fff;
+    border: 1px inset #808080;
+    padding: 2px 6px;
+    color: #000080;
+    font-weight: bold;
+    user-select: all;
+  }
+
+  .meme-steps {
+    flex: 0 0 470px;
+    font-family: "Courier New", monospace;
+    background: #000;
+    color: #0f0;
+    border: 2px inset #808080;
+    padding: 10px 14px;
+    margin: 0;
+  }
+  .meme-steps p {
+    margin: 4px 0;
+    font-size: 14px;
+    font-family: "Courier New", monospace;
+  }
+  .meme-steps .huh {
+    color: #ff0;
+    font-weight: bold;
+  }
+  .meme-steps .profit {
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 1px 1px 0 #00ff00;
+  }
+
+  .jam-wrap {
+    box-sizing: border-box;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  nav.entries {
+    width: 200px;
+    background: #ffffcc;
+    border: 2px inset #808080;
+    padding: 10px;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    position: sticky;
+    top: 20px;
+  }
+  nav.entries h2 {
+    font-size: 14px;
+    margin: 0 0 6px 0;
+    background: #000080;
+    color: #fff;
+    padding: 4px 6px;
+    font-family: "Courier New", monospace;
+  }
+  nav.entries ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav.entries li {
+    margin-bottom: 6px;
+    border-bottom: 1px dotted #999;
+    padding-bottom: 6px;
+  }
+  nav.entries button {
+    width: 100%;
+    text-align: left;
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    padding: 4px 6px;
+    cursor: pointer;
+  }
+  nav.entries button:active {
+    border-style: inset;
+  }
+  nav.entries button.active {
+    background: #000080;
+    color: #fff;
+    border-style: inset;
+  }
+  nav.entries .byline {
+    color: #555;
+    font-size: 10px;
+    font-style: italic;
+    display: block;
+    margin-top: 2px;
+  }
+  nav.entries .help {
+    font-size: 10px;
+    color: #333;
+    margin-top: 10px;
+  }
+
+  /* the column of stacked cards */
+  .card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    padding: 6px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.35);
+  }
+  .card .titlebar {
+    background: linear-gradient(90deg, #808080, #b0b0b0);
+    color: #fff;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    padding: 3px 6px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .card.top .titlebar {
+    background: linear-gradient(90deg, #000080, #1084d0);
+  }
+  .card iframe {
+    display: block;
+    width: 800px;
+    height: 600px;
+    border: 1px solid #000;
+    background: #fff;
+  }
+
+  footer {
+    width: 816px;
+    box-sizing: border-box;
+    margin: 20px 0 0 auto;
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    padding: 14px 16px;
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .submit-instructions {
+    flex: 1;
+    line-height: 1.5;
+  }
+  .submit-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100px;
+  }
+  .submit-links a,
+  .submit-links button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffcc;
+    border: 2px outset #fff;
+    color: #000080;
+    text-decoration: none;
+    padding: 5px 8px;
+    text-align: center;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .submit-links a:hover,
+  .submit-links button:hover {
+    background: #ffff99;
+  }
+  .submit-links a:active,
+  .submit-links button:active {
+    border-style: inset;
+  }
+  .submit-links button.active {
+    background: #000080;
+    color: #fff;
+    border-style: inset;
+  }
+
+  hr.dotted {
+    border: none;
+    border-top: 2px dotted #fff;
+    max-width: 800px;
+    margin: 16px auto;
+  }
+
+  @media (max-width: 1050px) {
+    .page-wrap {
+      width: 100%;
+    }
+    header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .meme-steps {
+      flex: 0 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    header .submit-links {
+      flex: 0 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 10px;
+    }
+    nav.entries {
+      display: none;
+    }
+    .card-stack {
+      width: 100%;
+    }
+    .card iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 800 / 600;
+    }
+    footer {
+      width: 100%;
+      flex-direction: column;
+    }
+    footer .submit-links {
+      width: 100%;
+    }
+    header .submit-links {
+      flex-direction: row;
+      gap: 8px;
+    }
+    header .submit-links a,
+    header .submit-links button {
+      flex: 1;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+<header>
+  <div class="header-intro">
+    <h1>jamming.goeshard.org</h1>
+    <p>YOU'VE HEARD OF GAME JAMS<br>BUT HAVE YOU HEARD OF WEB JAMS?</p>
+    <p>The <i>format</i> is <b>Best Viewed in 800x600</b>.</p>
+    <p>The <i>theme</i> is <b>TO BE ANNOUNCED</b>.</p>
+    <p>Please register your iframe now.</p>
+    <button class="news-btn" id="news-btn" onclick="toggleNews()">Latest News</button>
+  </div>
+
+  <div class="meme-steps">
+    <p>1. Make a blank page</p>
+    <p>2. Send me the link and I'll give you an iframe</p>
+    <p>3. On <b>October 18, 2026</b> the theme will be announced.<p>
+    <p>4. Make your page!</p>
+    <p>5. On <b>October 25, 2026</b> the pages will be judged.</p>
+    <p class="huh">6. ???</p>
+    <p class="profit">7. PROFIT</p>
+  </div>
+
+  <div class="submit-links">
+    <button id="email-btn" onclick="toggleEmail()">email</button>
+    <button id="agora-btn" onclick="toggleAgora()">agora</button>
+    <button id="discord-btn" onclick="toggleDiscord()">discord</button>
+  </div>
+
+</header>
+
+<div class="news-box" id="news-box" hidden>
+  <div class="news-box-title">
+    <span>LATEST NEWS</span>
+    <button class="news-close" onclick="closeNews()">x</button>
+  </div>
+  <div class="news-box-content">
+    <p><span class="news-date">[9/14/26]</span> came up with this on hardcord yesterday so just in the interest check phase now. could be a couple of us or could get actual submissions. contact me for an iframe.</p>
+  </div>
+</div>
+
+<div class="news-box" id="email-box" hidden>
+  <div class="news-box-title">
+    <span>CONTACT</span>
+    <button class="news-close" onclick="closeEmail()">x</button>
+  </div>
+  <div class="news-box-content">
+    <p>Reach out here to get registered and receive your iframe:</p>
+    <p><span class="email-address">goeshard.org@gmail.com</span></p>
+  </div>
+</div>
+
+<div class="news-box" id="agora-box" hidden>
+  <div class="news-box-title">
+    <span>AGORA ROAD</span>
+    <button class="news-close" onclick="closeAgora()">x</button>
+  </div>
+  <div class="news-box-content">
+    <p>You don't need to be on Agora Road to participate; it's just a point of contact where you can ask for an iframe and talk about the entries.</p>
+    <p><a class="link-out" href="https://forum.agoraroad.com/index.php?members/nobo.8448/" target="_blank">forum.agoraroad.com/members/nobo.8448</a></p>
+  </div>
+</div>
+
+<div class="news-box" id="discord-box" hidden>
+  <div class="news-box-title">
+    <span>DISCORD</span>
+    <button class="news-close" onclick="closeDiscord()">x</button>
+  </div>
+  <div class="news-box-content">
+    <p>You don't need to be on Discord to participate; it's just a point of contact where you can ask for an iframe and talk about the entries.</p>
+    <p><a class="link-out" href="https://hardcord.goeshard.org/" target="_blank">hardcord.goeshard.org</a></p>
+  </div>
+</div>
+
+<div class="jam-wrap">
+
+  <nav class="entries">
+    <h2>ENTRIES</h2>
+    <ul id="entry-list">
+      <li>
+        <button data-id="nobo" onclick="pullToTop('nobo', this)">nobo</button>
+      </li>
+      <li>
+        <button data-id="jaye" onclick="pullToTop('jaye', this)">jaye</button>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="card-stack" id="card-stack">
+
+    <div class="card" data-id="nobo">
+      <div class="titlebar">
+        <span>https://othala.goeshard.org/static/html/webjam1/</span>
+        <span></span>
+      </div>
+      <iframe src="https://othala.goeshard.org/static/html/webjam1/" data-placeholder="nobo"></iframe>
+    </div>
+
+    <div class="card" data-id="jaye">
+      <div class="titlebar">
+        <span>https://jayecline.neocities.org/webart/gohard_webjam1</span>
+        <span></span>
+      </div>
+      <iframe src="https://jayecline.neocities.org/webart/gohard_webjam1"></iframe>
+    </div>
+
+  </div>
+
+</div>
+
+<hr class="dotted">
+
+<footer>
+
+</footer>
+
+</div>
+
+<script>
+  function toggleNews() {
+    var box = document.getElementById('news-box');
+    var btn = document.getElementById('news-btn');
+    var isHidden = box.hasAttribute('hidden');
+    if (isHidden) {
+      box.removeAttribute('hidden');
+      btn.classList.add('active');
+    } else {
+      box.setAttribute('hidden', '');
+      btn.classList.remove('active');
+    }
+  }
+
+  function closeNews() {
+    document.getElementById('news-box').setAttribute('hidden', '');
+    document.getElementById('news-btn').classList.remove('active');
+  }
+
+  function toggleEmail() {
+    var box = document.getElementById('email-box');
+    var btn = document.getElementById('email-btn');
+    var isHidden = box.hasAttribute('hidden');
+    if (isHidden) {
+      box.removeAttribute('hidden');
+      btn.classList.add('active');
+    } else {
+      box.setAttribute('hidden', '');
+      btn.classList.remove('active');
+    }
+  }
+
+  function closeEmail() {
+    document.getElementById('email-box').setAttribute('hidden', '');
+    document.getElementById('email-btn').classList.remove('active');
+  }
+
+  function toggleAgora() {
+    var box = document.getElementById('agora-box');
+    var btn = document.getElementById('agora-btn');
+    var isHidden = box.hasAttribute('hidden');
+    if (isHidden) {
+      box.removeAttribute('hidden');
+      btn.classList.add('active');
+    } else {
+      box.setAttribute('hidden', '');
+      btn.classList.remove('active');
+    }
+  }
+
+  function closeAgora() {
+    document.getElementById('agora-box').setAttribute('hidden', '');
+    document.getElementById('agora-btn').classList.remove('active');
+  }
+
+  function toggleDiscord() {
+    var box = document.getElementById('discord-box');
+    var btn = document.getElementById('discord-btn');
+    var isHidden = box.hasAttribute('hidden');
+    if (isHidden) {
+      box.removeAttribute('hidden');
+      btn.classList.add('active');
+    } else {
+      box.setAttribute('hidden', '');
+      btn.classList.remove('active');
+    }
+  }
+
+  function closeDiscord() {
+    document.getElementById('discord-box').setAttribute('hidden', '');
+    document.getElementById('discord-btn').classList.remove('active');
+  }
+
+  function pullToTop(id, btn) {
+      var stack = document.getElementById('card-stack');
+      var card = stack.querySelector('.card[data-id="' + id + '"]');
+      if (!card) return;
+
+      // move the clicked card to the front of the column
+      stack.insertBefore(card, stack.firstChild);
+
+      // update which card is styled as "top"
+      var cards = stack.querySelectorAll('.card');
+      cards.forEach(function(c, i) {
+        c.classList.toggle('top', i === 0);
+      });
+
+      // highlight the active sidebar button
+      document.querySelectorAll('nav.entries button').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      if (btn) btn.classList.add('active');
+
+      // scroll the newly-topped card into view
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.querySelector('.card').classList.add('top');
+</script>
+
+</body>
+</html>
