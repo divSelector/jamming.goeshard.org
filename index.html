@@ -399,7 +399,7 @@
           <p>The <i>format</i> is <b>Best Viewed in 800x600</b>.</p>
           <p>The <i>theme</i> is <b>TO BE ANNOUNCED</b>.</p>
           <p>Please register your iframe now.</p>
-          <button class="news-btn" id="news-btn" onclick="toggleNews()">
+          <button class="news-btn" id="news-btn" onclick="toggleBox('news')">
             Latest News
           </button>
         </div>
@@ -416,10 +416,12 @@
         </div>
 
         <div class="submit-links">
-          <button id="email-btn" onclick="toggleEmail()">email</button>
-          <button id="agora-btn" onclick="toggleAgora()">agora</button>
-          <button id="discord-btn" onclick="toggleDiscord()">discord</button>
-          <button id="neocities-btn" onclick="toggleNeocities()">
+          <button id="email-btn" onclick="toggleBox('email')">email</button>
+          <button id="agora-btn" onclick="toggleBox('agora')">agora</button>
+          <button id="discord-btn" onclick="toggleBox('discord')">
+            discord
+          </button>
+          <button id="neocities-btn" onclick="toggleBox('neocities')">
             neocities
           </button>
         </div>
@@ -428,12 +430,12 @@
       <div class="news-box" id="news-box" hidden>
         <div class="news-box-title">
           <span>LATEST NEWS</span>
-          <button class="news-close" onclick="closeNews()">x</button>
+          <button class="news-close" onclick="closeBox('news')">x</button>
         </div>
         <div class="news-box-content">
           <p>
             <span class="news-date">[9/18/26]</span> Added a Neocities status
-            update thread as a point of contact + 5 jammer iframes. Keep them
+            update thread as a point of contact + 6 jammer iframes. Keep them
             coming.
           </p>
           <p>
@@ -448,7 +450,7 @@
       <div class="news-box" id="email-box" hidden>
         <div class="news-box-title">
           <span>EMAIL</span>
-          <button class="news-close" onclick="closeEmail()">x</button>
+          <button class="news-close" onclick="closeBox('email')">x</button>
         </div>
         <div class="news-box-content">
           <p>Reach out here to get registered and receive your iframe:</p>
@@ -459,7 +461,7 @@
       <div class="news-box" id="agora-box" hidden>
         <div class="news-box-title">
           <span>AGORA ROAD</span>
-          <button class="news-close" onclick="closeAgora()">x</button>
+          <button class="news-close" onclick="closeBox('agora')">x</button>
         </div>
         <div class="news-box-content">
           <p>
@@ -481,7 +483,7 @@
       <div class="news-box" id="neocities-box" hidden>
         <div class="news-box-title">
           <span>Neocities</span>
-          <button class="news-close" onclick="closeNeocities()">x</button>
+          <button class="news-close" onclick="closeBox('neocities')">x</button>
         </div>
         <div class="news-box-content">
           <p>
@@ -503,7 +505,7 @@
       <div class="news-box" id="discord-box" hidden>
         <div class="news-box-title">
           <span>DISCORD</span>
-          <button class="news-close" onclick="closeDiscord()">x</button>
+          <button class="news-close" onclick="closeBox('discord')">x</button>
         </div>
         <div class="news-box-content">
           <p>
@@ -554,12 +556,18 @@
               </button>
             </li>
             <li>
-              <button data-id="myspacetom" onclick="pullToTop('myspacetom', this)">
+              <button
+                data-id="myspacetom"
+                onclick="pullToTop('myspacetom', this)"
+              >
                 myspacetom
               </button>
             </li>
             <li>
-              <button data-id="hammerkoopa" onclick="pullToTop('hammerkoopa', this)">
+              <button
+                data-id="hammerkoopa"
+                onclick="pullToTop('hammerkoopa', this)"
+              >
                 hammerkoopa
               </button>
             </li>
@@ -573,6 +581,7 @@
               <span></span>
             </div>
             <iframe
+              sandbox="allow-scripts allow-same-origin"
               src="https://othala.goeshard.org/static/html/webjam1/"
             ></iframe>
           </div>
@@ -585,6 +594,7 @@
               <span></span>
             </div>
             <iframe
+              sandbox="allow-scripts allow-same-origin"
               src="https://jayecline.neocities.org/webart/goeshard_webjam1/"
             ></iframe>
           </div>
@@ -594,7 +604,10 @@
               <span>https://chxshire22.com/projects/jam/1/</span>
               <span></span>
             </div>
-            <iframe src="https://chxshire22.com/projects/jam/1/"></iframe>
+            <iframe
+              sandbox="allow-scripts allow-same-origin"
+              src="https://chxshire22.com/projects/jam/1/"
+            ></iframe>
           </div>
 
           <div class="card" data-id="fauxclore">
@@ -602,16 +615,21 @@
               <span>https://fauxclore.com/webjam/</span>
               <span></span>
             </div>
-            <iframe src="https://fauxclore.com/webjam/"></iframe>
+            <iframe
+              sandbox="allow-scripts allow-same-origin"
+              src="https://fauxclore.com/webjam/"
+            ></iframe>
           </div>
-
 
           <div class="card" data-id="shinobu">
             <div class="titlebar">
               <span>https://dreambuffer.neocities.org/jam/</span>
               <span></span>
             </div>
-            <iframe src="https://dreambuffer.neocities.org/jam/"></iframe>
+            <iframe
+              sandbox="allow-scripts allow-same-origin"
+              src="https://dreambuffer.neocities.org/jam/"
+            ></iframe>
           </div>
 
           <div class="card" data-id="myspacetom">
@@ -619,20 +637,24 @@
               <span>https://packardbell95.com/web-jam/</span>
               <span></span>
             </div>
-            <iframe src="https://packardbell95.com/web-jam/"></iframe>
+            <iframe
+              sandbox="allow-scripts allow-same-origin"
+              src="https://packardbell95.com/web-jam/"
+            ></iframe>
           </div>
-
 
           <div class="card" data-id="hammerkoopa">
             <div class="titlebar">
-              <span>https://walrus-island.neocities.org/static/jam/goeshard-web-jam</span>
+              <span
+                >https://walrus-island.neocities.org/static/jam/goeshard-web-jam</span
+              >
               <span></span>
             </div>
-            <iframe src="https://walrus-island.neocities.org/static/jam/goeshard-web-jam"></iframe>
+            <iframe
+              sandbox="allow-scripts allow-same-origin"
+              src="https://walrus-island.neocities.org/static/jam/goeshard-web-jam"
+            ></iframe>
           </div>
-
-
-
         </div>
       </div>
 
@@ -642,9 +664,9 @@
     </div>
 
     <script>
-      function toggleNews() {
-        var box = document.getElementById("news-box");
-        var btn = document.getElementById("news-btn");
+      function toggleBox(id) {
+        var box = document.getElementById(id + "-box");
+        var btn = document.getElementById(id + "-btn");
         var isHidden = box.hasAttribute("hidden");
         if (isHidden) {
           box.removeAttribute("hidden");
@@ -655,81 +677,9 @@
         }
       }
 
-      function closeNews() {
-        document.getElementById("news-box").setAttribute("hidden", "");
-        document.getElementById("news-btn").classList.remove("active");
-      }
-
-      function toggleEmail() {
-        var box = document.getElementById("email-box");
-        var btn = document.getElementById("email-btn");
-        var isHidden = box.hasAttribute("hidden");
-        if (isHidden) {
-          box.removeAttribute("hidden");
-          btn.classList.add("active");
-        } else {
-          box.setAttribute("hidden", "");
-          btn.classList.remove("active");
-        }
-      }
-
-      function closeEmail() {
-        document.getElementById("email-box").setAttribute("hidden", "");
-        document.getElementById("email-btn").classList.remove("active");
-      }
-
-      function toggleAgora() {
-        var box = document.getElementById("agora-box");
-        var btn = document.getElementById("agora-btn");
-        var isHidden = box.hasAttribute("hidden");
-        if (isHidden) {
-          box.removeAttribute("hidden");
-          btn.classList.add("active");
-        } else {
-          box.setAttribute("hidden", "");
-          btn.classList.remove("active");
-        }
-      }
-
-      function closeAgora() {
-        document.getElementById("agora-box").setAttribute("hidden", "");
-        document.getElementById("agora-btn").classList.remove("active");
-      }
-
-      function toggleDiscord() {
-        var box = document.getElementById("discord-box");
-        var btn = document.getElementById("discord-btn");
-        var isHidden = box.hasAttribute("hidden");
-        if (isHidden) {
-          box.removeAttribute("hidden");
-          btn.classList.add("active");
-        } else {
-          box.setAttribute("hidden", "");
-          btn.classList.remove("active");
-        }
-      }
-
-      function closeDiscord() {
-        document.getElementById("discord-box").setAttribute("hidden", "");
-        document.getElementById("discord-btn").classList.remove("active");
-      }
-
-      function toggleNeocities() {
-        var box = document.getElementById("neocities-box");
-        var btn = document.getElementById("neocities-btn");
-        var isHidden = box.hasAttribute("hidden");
-        if (isHidden) {
-          box.removeAttribute("hidden");
-          btn.classList.add("active");
-        } else {
-          box.setAttribute("hidden", "");
-          btn.classList.remove("active");
-        }
-      }
-
-      function closeNeocities() {
-        document.getElementById("neocities-box").setAttribute("hidden", "");
-        document.getElementById("neocities-btn").classList.remove("active");
+      function closeBox(id) {
+        document.getElementById(id + "-box").setAttribute("hidden", "");
+        document.getElementById(id + "-btn").classList.remove("active");
       }
 
       function pullToTop(id, btn) {
