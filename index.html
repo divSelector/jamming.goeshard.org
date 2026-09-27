@@ -270,12 +270,33 @@
       .card.top .titlebar {
         background: linear-gradient(90deg, #000080, #1084d0);
       }
+      .card .titlebar .card-hide-btn {
+        background: #c0c0c0;
+        border: 2px outset #fff;
+        color: #000;
+        font-family: "Courier New", monospace;
+        font-size: 11px;
+        line-height: 1;
+        padding: 2px 8px;
+        margin-left: 8px;
+        cursor: pointer;
+        flex: 0 0 auto;
+      }
+      .card .titlebar .card-hide-btn:active {
+        border-style: inset;
+      }
       .card iframe {
         display: block;
         width: 800px;
         height: 600px;
         border: 1px solid #000;
-        background: #fff;
+        background: #b0b0b0;
+      }
+      .card.collapsed {
+        padding-bottom: 6px;
+      }
+      .card.collapsed .titlebar {
+        margin-bottom: 0;
       }
 
       footer {
@@ -368,9 +389,10 @@
           width: 100%;
         }
         .card iframe {
-          width: 100%;
+          width: min(100%, 800px);
           height: auto;
           aspect-ratio: 800 / 600;
+          margin: 0 auto;
         }
         footer {
           width: 100%;
@@ -526,262 +548,10 @@
       <div class="jam-wrap">
         <nav class="entries">
           <h2>ENTRIES</h2>
-          <ul id="entry-list">
-            <li>
-              <button data-id="jaye" onclick="pullToTop('jaye', this)">
-                jaye
-              </button>
-            </li>
-            <li>
-              <button data-id="chxshire" onclick="pullToTop('chxshire', this)">
-                chxshire
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="fauxclore"
-                onclick="pullToTop('fauxclore', this)"
-              >
-                fauxclore
-              </button>
-            </li>
-            <li>
-              <button data-id="shinobu" onclick="pullToTop('shinobu', this)">
-                shinobu
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="myspacetom"
-                onclick="pullToTop('myspacetom', this)"
-              >
-                myspacetom
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="hammerkoopa"
-                onclick="pullToTop('hammerkoopa', this)"
-              >
-                hammerkoopa
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="risingthumb"
-                onclick="pullToTop('risingthumb', this)"
-              >
-                risingthumb
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="dargonics"
-                onclick="pullToTop('dargonics', this)"
-              >
-                dargonics
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="nykarp"
-                onclick="pullToTop('nykarp', this)"
-              >
-                nykarp
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="magenta416"
-                onclick="pullToTop('magenta416', this)"
-              >
-                magenta416
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="some_porcupine"
-                onclick="pullToTop('some_porcupine', this)"
-              >
-                some_porcupine
-              </button>
-            </li>
-            <li>
-              <button
-                data-id="punp"
-                onclick="pullToTop('punp', this)"
-              >
-                punp
-              </button>
-            </li>
-
-            <li>
-              <button data-id="nobo" onclick="pullToTop('nobo', this)">
-                nobo
-              </button>
-            </li>
-          </ul>
+          <ul id="entry-list"></ul>
         </nav>
 
-        <div class="card-stack" id="card-stack">
-          <div class="card" data-id="jaye">
-            <div class="titlebar">
-              <span
-                >https://jayecline.neocities.org/webart/goeshard_webjam1/</span
-              >
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://jayecline.neocities.org/webart/goeshard_webjam1/"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="chxshire">
-            <div class="titlebar">
-              <span>https://chxshire22.com/projects/jam/1/</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://chxshire22.com/projects/jam/1/"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="fauxclore">
-            <div class="titlebar">
-              <span>https://fauxclore.com/webjam/</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://fauxclore.com/webjam/"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="shinobu">
-            <div class="titlebar">
-              <span>https://dreambuffer.neocities.org/jam/</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://dreambuffer.neocities.org/jam/"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="myspacetom">
-            <div class="titlebar">
-              <span>https://packardbell95.com/web-jam/</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://packardbell95.com/web-jam/"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="hammerkoopa">
-            <div class="titlebar">
-              <span
-                >https://walrus-island.neocities.org/static/jam/goeshard-web-jam</span
-              >
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://walrus-island.neocities.org/static/jam/goeshard-web-jam"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="risingthumb">
-            <div class="titlebar">
-              <span>https://random.risingthumb.xyz/NoboWebjamOctober2026/</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://random.risingthumb.xyz/NoboWebjamOctober2026/"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="dargonics">
-            <div class="titlebar">
-              <span>https://dargonics.neocities.org/jam/</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://dargonics.neocities.org/jam/"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="nykarp">
-            <div class="titlebar">
-              <span>https://nykarp.neocities.org/projects/nobo-webjam-2026</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://nykarp.neocities.org/projects/nobo-webjam-2026"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="magenta416">
-            <div class="titlebar">
-              <span>https://kineticagenda.nekoweb.org/arwebjam/magentajam.html</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://kineticagenda.nekoweb.org/arwebjam/magentajam.html"
-            ></iframe>
-          </div>
-          <div class="card" data-id="some_porcupine">
-            <div class="titlebar">
-              <span>https://oldkidz-newblockz.neocities.org/webjam/webjam_goeshard_ix-x-2026</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://oldkidz-newblockz.neocities.org/webjam/webjam_goeshard_ix-x-2026"
-            ></iframe>
-          </div>
-          <div class="card" data-id="punp">
-            <div class="titlebar">
-              <span>https://punp.neocities.org/net_art/jam/</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://punp.neocities.org/net_art/jam/"
-            ></iframe>
-          </div>
-
-          <div class="card" data-id="nobo">
-            <div class="titlebar">
-              <span>https://othala.goeshard.org/static/html/webjam1/</span>
-              <span></span>
-            </div>
-            <iframe
-              sandbox="allow-scripts allow-same-origin"
-              allow="autoplay 'none'"
-              src="https://othala.goeshard.org/static/html/webjam1/"
-            ></iframe>
-          </div>
-        </div>
+        <div class="card-stack" id="card-stack"></div>
       </div>
 
       <hr class="dotted" />
@@ -790,6 +560,23 @@
     </div>
 
     <script>
+      var entries = [
+        { id: "jaye", url: "https://jayecline.neocities.org/webart/goeshard_webjam1/" },
+        { id: "chxshire", url: "https://chxshire22.com/projects/jam/1/" },
+        { id: "fauxclore", url: "https://fauxclore.com/webjam/" },
+        { id: "shinobu", url: "https://dreambuffer.neocities.org/jam/" },
+        { id: "myspacetom", url: "https://packardbell95.com/web-jam/" },
+        { id: "hammerkoopa", url: "https://walrus-island.neocities.org/static/jam/goeshard-web-jam" },
+        { id: "risingthumb", url: "https://random.risingthumb.xyz/NoboWebjamOctober2026/" },
+        { id: "dargonics", url: "https://dargonics.neocities.org/jam/" },
+        { id: "nykarp", url: "https://nykarp.neocities.org/projects/nobo-webjam-2026" },
+        { id: "magenta416", url: "https://kineticagenda.nekoweb.org/arwebjam/magentajam.html" },
+        { id: "some_porcupine", url: "https://oldkidz-newblockz.neocities.org/webjam/webjam_goeshard_ix-x-2026" },
+        { id: "punp", url: "https://punp.neocities.org/net_art/jam/" },
+        { id: "nobo", url: "https://othala.goeshard.org/static/html/webjam1/" },
+        { id: "newhorizon", url: "https://republicofnoria.neocities.org/" },
+      ];
+
       function toggleBox(id) {
         var box = document.getElementById(id + "-box");
         var btn = document.getElementById(id + "-btn");
@@ -802,27 +589,31 @@
           btn.classList.remove("active");
         }
       }
- 
+
       function closeBox(id) {
         document.getElementById(id + "-box").setAttribute("hidden", "");
         document.getElementById(id + "-btn").classList.remove("active");
       }
- 
-      // shared helper: reload a card's iframe to kill any audio/video it's playing
-      // Remember each iframe's real URL once, before we ever blank it out.
+
+      // Fisher-Yates shuffle, returns a new array (doesn't mutate entries).
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i];
+          a[i] = a[j];
+          a[j] = tmp;
+        }
+        return a;
+      }
+
       function getOriginalSrc(iframe) {
         if (!iframe.dataset.src) {
           iframe.dataset.src = iframe.getAttribute("src");
         }
         return iframe.dataset.src;
       }
- 
-      // Kill all media by unloading to about:blank instead of reloading the
-      // same URL. Reloading the same URL can let the entry's page autoplay
-      // again once the user has manually played it once (the browser then
-      // trusts that origin for autoplay-with-sound, per-origin, regardless
-      // of our iframe's autoplay Permissions-Policy). A blank frame has
-      // nothing to autoplay and doesn't run the entry's page code at all.
+
       function stopCardMedia(card) {
         var iframe = card.querySelector("iframe");
         if (!iframe) return;
@@ -831,9 +622,7 @@
           iframe.src = "about:blank";
         }
       }
- 
-      // Restore the real URL (a fresh, un-trusted load) when the card is
-      // scrolled back into view or selected.
+
       function loadCardMedia(card) {
         var iframe = card.querySelector("iframe");
         if (!iframe) return;
@@ -842,41 +631,138 @@
           iframe.src = original;
         }
       }
- 
-      function pullToTop(id, btn) {
-        var stack = document.getElementById("card-stack");
-        var card = stack.querySelector('.card[data-id="' + id + '"]');
+
+      var HIDDEN_STORAGE_KEY = "goeshard-webjam-hidden-cards";
+
+      function getHiddenSet() {
+        try {
+          var raw = localStorage.getItem(HIDDEN_STORAGE_KEY);
+          return new Set(raw ? JSON.parse(raw) : []);
+        } catch (e) {
+          return new Set();
+        }
+      }
+
+      function saveHiddenSet(set) {
+        try {
+          localStorage.setItem(HIDDEN_STORAGE_KEY, JSON.stringify(Array.from(set)));
+        } catch (e) {
+          // localStorage unavailable (private browsing, etc) -- fail silently
+        }
+      }
+
+      function getEntryUrl(id) {
+        var found = entries.filter(function (e) {
+          return e.id === id;
+        })[0];
+        return found ? found.url : null;
+      }
+
+      function collapseCard(card) {
+        card.classList.add("collapsed");
+        var iframe = card.querySelector("iframe");
+        if (iframe) iframe.remove();
+        var btn = card.querySelector(".card-hide-btn");
+        if (btn) btn.textContent = "show";
+      }
+
+      function expandCard(card, id) {
+        card.classList.remove("collapsed");
+        if (!card.querySelector("iframe")) {
+          var url = getEntryUrl(id);
+          var iframe = document.createElement("iframe");
+          iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
+          iframe.setAttribute("allow", "autoplay 'none'");
+          iframe.dataset.src = url;
+          iframe.setAttribute("src", url);
+          card.appendChild(iframe);
+        }
+        var btn = card.querySelector(".card-hide-btn");
+        if (btn) btn.textContent = "hide";
+      }
+
+      function toggleCardHidden(id) {
+        var card = document.querySelector('.card[data-id="' + id + '"]');
         if (!card) return;
- 
+
+        var hidden = getHiddenSet();
+        if (hidden.has(id)) {
+          hidden.delete(id);
+          expandCard(card, id);
+        } else {
+          hidden.add(id);
+          collapseCard(card);
+        }
+        saveHiddenSet(hidden);
+      }
+
+
+      function setHighlighted(id) {
+        document.querySelectorAll(".card").forEach(function (c) {
+          c.classList.toggle("top", c.getAttribute("data-id") === id);
+        });
+        document.querySelectorAll("nav.entries button").forEach(function (b) {
+          b.classList.toggle("active", b.getAttribute("data-id") === id);
+        });
+      }
+
+      function pullToTop(id) {
+        var stack = document.getElementById("card-stack");
+        var navList = document.getElementById("entry-list");
+        var card = stack.querySelector('.card[data-id="' + id + '"]');
+        var li = navList.querySelector('li[data-id="' + id + '"]');
+        if (!card || !li) return;
+
         // stop media on every other card, restore the selected one
         stack.querySelectorAll(".card").forEach(function (c) {
           if (c !== card) stopCardMedia(c);
         });
         loadCardMedia(card);
- 
+
         stack.insertBefore(card, stack.firstChild);
- 
-        var cards = stack.querySelectorAll(".card");
-        cards.forEach(function (c, i) {
-          c.classList.toggle("top", i === 0);
-        });
- 
-        document.querySelectorAll("nav.entries button").forEach(function (b) {
-          b.classList.remove("active");
-        });
-        if (btn) btn.classList.add("active");
- 
+        navList.insertBefore(li, navList.firstChild);
+
+        setHighlighted(id);
+
         card.scrollIntoView({ behavior: "smooth", block: "start" });
       }
- 
-      document.querySelector(".card").classList.add("top");
- 
-      (function () {
+
+      var HIGHLIGHT_OFFSET = 24; // px from the viewport top counted as "at the top"
+      var highlightTicking = false;
+
+      function updateHighlightFromScroll() {
+        var cards = document.querySelectorAll(".card");
+        if (!cards.length) return;
+
+        var current = cards[0];
+        cards.forEach(function (card) {
+          var rect = card.getBoundingClientRect();
+          if (rect.top - HIGHLIGHT_OFFSET <= 0) {
+            current = card;
+          }
+        });
+
+        setHighlighted(current.getAttribute("data-id"));
+      }
+
+      function requestHighlightUpdate() {
+        if (highlightTicking) return;
+        highlightTicking = true;
+        requestAnimationFrame(function () {
+          updateHighlightFromScroll();
+          highlightTicking = false;
+        });
+      }
+
+      var mediaObserver = null;
+
+      function observeCards() {
+        if (mediaObserver) mediaObserver.disconnect();
+
         var wasVisible = {};
- 
-        var observer = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
+        mediaObserver = new IntersectionObserver(
+          function (obsEntries) {
+            obsEntries.forEach(function (entry) {
               var id = entry.target.getAttribute("data-id");
               if (wasVisible[id] && !entry.isIntersecting) {
                 stopCardMedia(entry.target);
@@ -888,11 +774,80 @@
           },
           { threshold: 0 },
         );
- 
+
         document.querySelectorAll(".card").forEach(function (card) {
-          observer.observe(card);
+          mediaObserver.observe(card);
         });
-      })();
+      }
+
+      function buildUI(order) {
+        var navList = document.getElementById("entry-list");
+        var cardStack = document.getElementById("card-stack");
+        navList.innerHTML = "";
+        cardStack.innerHTML = "";
+
+        var hiddenSet = getHiddenSet();
+
+        order.forEach(function (entry, i) {
+          // --- nav entry ---
+          var li = document.createElement("li");
+          li.setAttribute("data-id", entry.id);
+
+          var navBtn = document.createElement("button");
+          navBtn.setAttribute("data-id", entry.id);
+          navBtn.textContent = entry.id;
+          navBtn.addEventListener("click", function () {
+            pullToTop(entry.id);
+          });
+
+          li.appendChild(navBtn);
+          navList.appendChild(li);
+
+          // --- card ---
+          var isHidden = hiddenSet.has(entry.id);
+
+          var card = document.createElement("div");
+          card.className = "card" + (isHidden ? " collapsed" : "");
+          card.setAttribute("data-id", entry.id);
+
+          var titlebar = document.createElement("div");
+          titlebar.className = "titlebar";
+          var urlSpan = document.createElement("span");
+          urlSpan.textContent = entry.url;
+          titlebar.appendChild(urlSpan);
+
+          var hideBtn = document.createElement("button");
+          hideBtn.type = "button";
+          hideBtn.className = "card-hide-btn";
+          hideBtn.textContent = isHidden ? "show" : "hide";
+          hideBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            toggleCardHidden(entry.id);
+          });
+          titlebar.appendChild(hideBtn);
+
+          card.appendChild(titlebar);
+
+          if (!isHidden) {
+            var iframe = document.createElement("iframe");
+            iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
+            iframe.setAttribute("allow", "autoplay 'none'");
+            iframe.dataset.src = entry.url;
+            iframe.setAttribute("src", entry.url);
+            card.appendChild(iframe);
+          }
+
+          cardStack.appendChild(card);
+        });
+
+        observeCards();
+      }
+
+      buildUI(shuffle(entries));
+
+      updateHighlightFromScroll();
+      window.addEventListener("scroll", requestHighlightUpdate, { passive: true });
+      window.addEventListener("resize", requestHighlightUpdate);
     </script>
   </body>
 </html>
