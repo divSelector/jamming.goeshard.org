@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <title>jamming.goeshard.org</title>
     <style>
+      /* Reordering cards with CSS `order` shifts layout; with scroll anchoring
+         on, the browser "corrects" the scroll position mid-click and fights the
+         smooth scroll, causing a jump above the list and back. Turn it off. */
+      html,
+      body,
+      .jam-wrap,
+      .card-stack,
+      .card {
+        overflow-anchor: none;
+      }
+
       body {
         margin: 0;
         padding: 20px;
@@ -207,6 +218,8 @@
         list-style: none;
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
       }
       nav.entries li {
         margin-bottom: 6px;
@@ -424,6 +437,13 @@
           <button class="news-btn" id="news-btn" onclick="toggleBox('news')">
             Latest News
           </button>
+          <button
+            class="news-btn"
+            id="randomize-btn"
+            onclick="randomizeEntries()"
+          >
+            Randomize
+          </button>
         </div>
 
         <div class="meme-steps">
@@ -455,6 +475,10 @@
           <button class="news-close" onclick="closeBox('news')">x</button>
         </div>
         <div class="news-box-content">
+          <p>
+            <span class="news-date">[10/9/26]</span> fixed some bugs + realized that everyone who joins does so in the two weeks so waiting this long to start probably wasn't the move. Lesson learned I guess. 9 days till start.
+          </p>
+          <p>
           <p>
             <span class="news-date">[9/27/26]</span> hide/show feature + only run scripts of onscreen entries + lots of people added
           </p>
@@ -709,6 +733,24 @@
         });
       }
 
+      // Bring the clicked entry to the top; everything that was above it
+      // moves down one slot, and everything below it stays put.
+      // Positions are changed with CSS `order`, so no DOM nodes are moved and
+      // no iframe is ever reloaded by the reordering.
+      function getOrder(el) {
+        return parseInt(el.style.order, 10) || 0;
+      }
+
+      function moveToFront(items, target) {
+        var old = getOrder(target);
+        items.forEach(function (el) {
+          if (el !== target && getOrder(el) < old) {
+            el.style.order = getOrder(el) + 1;
+          }
+        });
+        target.style.order = 0;
+      }
+
       function pullToTop(id) {
         var stack = document.getElementById("card-stack");
         var navList = document.getElementById("entry-list");
@@ -716,15 +758,10 @@
         var li = navList.querySelector('li[data-id="' + id + '"]');
         if (!card || !li) return;
 
-        // stop media on every other card, restore the selected one
-        stack.querySelectorAll(".card").forEach(function (c) {
-          if (c !== card) stopCardMedia(c);
-        });
+        moveToFront(Array.from(stack.querySelectorAll(".card")), card);
+        moveToFront(Array.from(navList.querySelectorAll("li")), li);
+
         loadCardMedia(card);
-
-        stack.insertBefore(card, stack.firstChild);
-        navList.insertBefore(li, navList.firstChild);
-
         setHighlighted(id);
 
         card.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -737,13 +774,25 @@
         var cards = document.querySelectorAll(".card");
         if (!cards.length) return;
 
-        var current = cards[0];
+        // Cards are positioned with CSS `order`, so DOM order != visual order.
+        // Pick the card whose top edge is closest to (but not below) the top
+        // of the viewport; fall back to the first card on screen.
+        var current = null;
+        var currentTop = -Infinity;
+        var first = null;
+        var firstTop = Infinity;
         cards.forEach(function (card) {
-          var rect = card.getBoundingClientRect();
-          if (rect.top - HIGHLIGHT_OFFSET <= 0) {
+          var t = card.getBoundingClientRect().top;
+          if (t < firstTop) {
+            firstTop = t;
+            first = card;
+          }
+          if (t - HIGHLIGHT_OFFSET <= 0 && t > currentTop) {
+            currentTop = t;
             current = card;
           }
         });
+        current = current || first;
 
         setHighlighted(current.getAttribute("data-id"));
       }
@@ -795,6 +844,7 @@
           // --- nav entry ---
           var li = document.createElement("li");
           li.setAttribute("data-id", entry.id);
+          li.style.order = i;
 
           var navBtn = document.createElement("button");
           navBtn.setAttribute("data-id", entry.id);
@@ -812,6 +862,7 @@
           var card = document.createElement("div");
           card.className = "card" + (isHidden ? " collapsed" : "");
           card.setAttribute("data-id", entry.id);
+          card.style.order = i;
 
           var titlebar = document.createElement("div");
           titlebar.className = "titlebar";
@@ -846,7 +897,13 @@
         observeCards();
       }
 
-      buildUI(shuffle(entries));
+      function randomizeEntries() {
+        buildUI(shuffle(entries));
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        updateHighlightFromScroll();
+      }
+
+      buildUI(entries);
 
       updateHighlightFromScroll();
       window.addEventListener("scroll", requestHighlightUpdate, { passive: true });
